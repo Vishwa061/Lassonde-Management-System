@@ -1,4 +1,4 @@
-package back_end_package;
+package backend.classes;
 
 import java.util.List;
 
@@ -25,11 +25,13 @@ public abstract class Person {
 		return this.email;
 	}
 
-	public int getID() {
+	public int getId() {
 		return this.id;
 	}
-
-	public static void main(String[] args) {
+	
+	@Override
+	public String toString() {
+		return "[Name: " + getName() + ", " + "Email: " + getEmail() + ", " + "ID: " + getId() + "]";
 	}
-
+	
 }

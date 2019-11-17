@@ -1,4 +1,4 @@
-package back_end_package;
+package backend.classes;
 
 import java.util.List;
 

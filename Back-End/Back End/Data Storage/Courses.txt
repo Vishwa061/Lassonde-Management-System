@@ -1,0 +1,33 @@
+Culture Sensitive Medesign|K|2019|Summer|Social|LAS1497|S15L88
+Circular Techniques & Theory|L|2020|Summer|Design|LAS1877|U90Q40
+Mechanical Dynamics|E|2020|Summer|Physics|LAS2462|Y10Y08
+Cultural Concept Testing|Y|2019|Summer|Social|LAS1169|J30H27
+Social Analysis|Y|2019|Fall|Social|LAS2807|Z25N22
+Cultural Concept Testing & Statics|S|2020|Fall|Social|LAS2817|L08J68
+Concept Innovation|I|2019|Summer|Social|LAS1407|U14L18
+Life Cycle Robotics & Technology|T|2019|Winter|Robotics|LAS2446|I24Z32
+Cultural Environments|G|2019|Fall|Social|LAS1361|V43G52
+Design Driven Experience|K|2020|Winter|Design|LAS1603|Q27D08
+Technical Visualisation & Design|X|2019|Fall|Design|LAS1532|M34Z26
+Mechanical Embodiment|L|2020|Summer|Physics|LAS1723|A21B32
+Memetic Embodiment & Consumer Behaviour|R|2020|Fall|Social|LAS2892|G07B06
+Emotional Innovation|D|2019|Winter|Social|LAS1916|J76Q86
+Sustainable Techniques|E|2019|Winter|Social|LAS1899|W70R25
+Mechancial Systems|X|2020|Summer|Physics|LAS1198|Q00K45
+Introduction to Statistics|J|2019|Winter|Math|LAS1113|F16U83
+Calculus(I)|J|2019|Winter|Math|LAS2137|C61E49
+Calculus(II)|Q|2019|Winter|Math|LAS2869|D02D98
+Advanced Linear Algebra|D|2019|Winter|Math|LAS1180|D19B72
+Linear Algebra|A|2019|Winter|Math|LAS2693|B06I63
+Chemistry(I)|Q|2020|Winter|Chemistry|LAS2775|Z00T41
+Chemistry(II)|H|2020|Winter|Chemistry|LAS1045|L32U46
+Organic Chemistry|T|2020|Winter|Chemistry|LAS2534|C37E87
+Inorganic Chemistry|X|2020|Summer|Chemistry|LAS1804|N67U86
+Spanish|G|2019|Winter|Social|LAS2037|Z55R77
+English|C|2019|Fall|Social|LAS2820|S24N81
+French|G|2020|Summer|Social|LAS1725|B18H31
+Russian|M|2020|Summer|Social|LAS2554|K73P97
+Chinese|D|2020|Fall|Social|LAS2003|R23M09
+Introduction to Mobile Computing|E|2020|Fall|Computer Science|LAS2553|I55W66
+Object Oriented Programming|M|2019|Winter|Computer Science|LAS2655|A59J91
+Data Structures|O|2019|Fall|Computer Science|LAS1540|S17S48
