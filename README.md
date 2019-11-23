@@ -1,4 +1,4 @@
-# Management-System
+# Lassonde Management System
 
 The **public** folder must contain **html/css/javascript** file(s) for the **frontend**
 <br />
