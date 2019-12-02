@@ -18,7 +18,7 @@
       <a href ="" class="topButton">Exams</a>
     </div>
     <div id="options">
-      <button class="optionButtons">Add Student</button>
+      <button class="optionButtons" onclick="addStudent()">Add Student</button>
       <br>
       <button id="remButton" class="optionButtons" onclick="remButton()">Remove Student</button>
       <div id="remSearch"  hidden="true">
@@ -48,7 +48,7 @@
         </p>
       </div>
       <br>
-      <button class="optionButtons">Show all Students</button>
+      <button class="optionButtons" onclick="createTable()">Show all Students</button>
     </div>
     <div id="searchOptions">
       <p id="searchBy">Search by</p> <br> <br> <br>
@@ -61,7 +61,7 @@
       <button id="searchMethods" onclick="onSearch()">Search</button>
     </div>
     <div id="test">
-      <table id="data">
+      <!-- <table id="data">
           <tr>
             <th width="50%">Student Name</th>
             <th width="35%">Student Number</th>
@@ -69,31 +69,56 @@
             <th width="5%"></th>
           </tr>
           <tr>
-            <td id="firstRow">John Doe</td>
-            <td>123456789</td>
+            <td id="name1">John Doe</td>
+            <td id="si1">123456789</td>
             <td>Update</td>
             <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
           </tr>
           <tr>
-            <td>Dane Joe</td>
-            <td>234567890</td>
+            <td id="name2">Dane Joe</td>
+            <td id="si2">234567890</td>
             <td>Update</td>
             <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
           </tr>
           <tr>
-            <td>Johnathan Doeson</td>
-            <td>345678901</td>
+            <td id="name3">Johnathan Doeson</td>
+            <td id="si3">345678901</td>
             <td>Update</td>
             <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
           </tr>
           <tr>
-            <td>Lorem Ipsum</td>
-            <td>456789012</td>
+            <td id="name4">Lorem Ipsum</td>
+            <td id="si4">456789012</td>
             <td>Update</td>
             <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
           </tr>
-      </table>
+      </table> -->
     </div>
+    <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p> Add Information to add student.</p>
+    </br>
+      <p class="addstu">
+        &nbsp;
+        Student Name:
+        &nbsp;
+        &nbsp;
+        <input type="text" id="stuname" class="addstu" >
+      </p>
+      <p class="addstu">
+        Student Number:
+        &nbsp;
+        <input type="number" id="stunum" class="addstu">
+      </p>
+    </br>
+    <button id="addbut" onclick="addbutonclk()"> Add </button>
+    </div>
+
+  </div>
+
   </div>
 </body>
 </html>
