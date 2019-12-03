@@ -97,7 +97,7 @@ exports.getAllCourses = functions.https.onRequest((request, response) => {
         querySnapshot.forEach(doc => {
             courses.push(doc.data());
         });
-        console.log("Students Found in Database: ", courses);
+        console.log("Courses Found in Database: ", courses);
         response.send(courses);
         return;
     });
