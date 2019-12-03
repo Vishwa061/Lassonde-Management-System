@@ -58,7 +58,7 @@ exports.getAllStudents = functions.https.onRequest((request, response) => {
 
 exports.getAllProfessors = functions.https.onRequest((request, response) => {
     var professors = [];
-    db.collection("students").get()
+    db.collection("professors").get()
     .then(querySnapshot => {
         querySnapshot.forEach(doc => {
             professors.push(doc.data());
@@ -75,12 +75,12 @@ exports.getAllProfessors = functions.https.onRequest((request, response) => {
 
 exports.getAllStaff = functions.https.onRequest((request, response) => {
     var staff = [];
-    db.collection("students").get()
+    db.collection("staff").get()
     .then(querySnapshot => {
         querySnapshot.forEach(doc => {
             staff.push(doc.data());
         });
-        console.log("Students Found in Database: ", staff);
+        console.log("Staff Found in Database: ", staff);
         response.send(staff);
         return;
     })
@@ -90,6 +90,22 @@ exports.getAllStaff = functions.https.onRequest((request, response) => {
     return;
 });
 
+exports.getAllCourses = functions.https.onRequest((request, response) => {
+    var courses = [];
+    var test = db.collection("courses").get()
+    .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            courses.push(doc.data());
+        });
+        console.log("Students Found in Database: ", courses);
+        response.send(courses);
+        return;
+    });
+    test.catch(error => {
+        console.log(error);
+    });
+    return;
+});
 
 // TO TEST:
 // firebase serve --only functions
