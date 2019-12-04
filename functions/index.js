@@ -36,6 +36,7 @@ exports.getStudents = functions.https.onRequest((request, response) => {
             })
             console.log("Students Found in Query: ", students);
             response.send(students);
+            return;
         })
         .catch(error => {
             console.error(error);
@@ -53,6 +54,7 @@ exports.getAllStudents = functions.https.onRequest((request, response) => {
             });
             console.log("Students Found in Database: ", students);
             response.send(students);
+            return;
         })
         .catch(error => {
             console.log(error);
@@ -70,6 +72,7 @@ exports.getAllProfessors = functions.https.onRequest((request, response) => {
             });
             console.log("Professors Found in Database: ", professors);
             response.send(professors);
+            return;
         })
         .catch(error => {
             console.log(error);
@@ -87,6 +90,7 @@ exports.getAllStaff = functions.https.onRequest((request, response) => {
             });
             console.log("Staff Found in Database: ", staff);
             response.send(staff);
+            return;
         })
         .catch(error => {
             console.log(error);
@@ -104,6 +108,7 @@ exports.getAllCourses = functions.https.onRequest((request, response) => {
             });
             console.log("Courses Found in Database: ", courses);
             response.send(courses);
+            return;
         })
         .catch(error => {
             console.log(error);
@@ -136,13 +141,14 @@ exports.addStudent = functions.https.onRequest((request, response) => {
             return studentExists;
         })
         .then(studentExists => {
-            if (studentExists == false) {
+            if (studentExists === false) {
                 addStudent();
                 response.send(true);
             }
             else {
                 response.send(false);
             }
+            return;
         })
         .catch(error => {
             console.error(error);
@@ -158,11 +164,12 @@ exports.addStudent = functions.https.onRequest((request, response) => {
         })
             .then(docRef => {
                 console.log("Student added with DOCUMENT ID: ", docRef.id);
+                return;
             })
             .catch(error => {
                 console.error("Error adding student: ", error);
             });
-    };
+    }
 
     return;
 });
