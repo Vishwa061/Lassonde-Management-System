@@ -1,28 +1,27 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-admin.initializeApp();
+const url = require('url');
+const querystring = require('querystring');
 
 
 // Initialize Cloud Firestore through Firebase
+admin.initializeApp();
 var db = admin.firestore();
 
 
 exports.getStudents = functions.https.onRequest((request, response) => {
-    const url = require('url');
-    const querystring = require('querystring');
-
-    // Parsing the request
+    // Parses the request
     let parsedUrl = url.parse(request.url);
     let parsedQs = querystring.parse(parsedUrl.query);
 
-    // Extracting query request 
+    // Extracts the query parameters 
     var key = parsedQs.key;
     var value = parsedQs.value;
 
     // console.log(key);
     // console.log(value);
 
-    // Checks if request data is valid
+    // Checks if the parameters are valid
     if (!(typeof key === "string" && typeof value === "string") || key.length === 0 || value.length === 0) {
         throw new functions.https.HttpsError("invalid-argument", "The function must be called with " +
             "two arguments 'key' and 'value' which must both be Strings and non-empty.");
@@ -117,16 +116,15 @@ exports.getAllCourses = functions.https.onRequest((request, response) => {
 // true if the student id is unique
 // false otherwise
 exports.addStudent = functions.https.onRequest((request, response) => {
-    var sCourses = [];
-    var sEmail = "";
-    var sId = "1234567";
-    var sName = "";
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
 
-    // // Somehow read the request
-    // sCourses = request.courses;
-    // sEmail = request.email;
-    // sId = request.id;
-    // sName = request.name;
+    // Extracts the query parameters 
+    var sCourses = parsedQs.courses;
+    var sEmail = parsedQs.email;
+    var sId = parsedQs.id;
+    var sName = parsedQs.name;
 
     // Queries Cloud Firestore for requested student
     db.collection("students").where("id", "==", sId).get()
