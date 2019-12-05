@@ -1,4 +1,4 @@
-# Setup Instructions
+# SETUP INSTRUCTIONS
 
 1) Save a copy of files you may have changed (html/css/js files)
 
