@@ -245,11 +245,15 @@ exports.addStudent = functions.https.onRequest((request, response) => {
     var sId = parsedQs.id;
     var sName = parsedQs.name;
 
+    if (sId.length !== 9) {
+        throw new functions.https.HttpsError("invalid-argument", "Student IDs must be 9 numbers long.");
+    }
+
     // Queries Cloud Firestore for requested student
     db.collection("students").where("id", "==", sId).get()
         .then(querySnapshot => {
             let studentExists = false;
-            if (querySnapshot.size > 0) {
+            if (querySnapshot.size === 1) {
                 studentExists = true;
             }
             return studentExists;
@@ -268,7 +272,7 @@ exports.addStudent = functions.https.onRequest((request, response) => {
             console.error(error);
         });
 
-    // Adds a new student to the database
+    // Adds a new student
     function addStudent() {
         db.collection("students").add({
             courses: sCourses,
@@ -287,6 +291,133 @@ exports.addStudent = functions.https.onRequest((request, response) => {
 
     return;
 });
+
+
+/////// PUT REQUEST FUNCTIONS ///////
+
+
+// Returns:
+// true if the student id exists
+// false otherwise
+exports.updateStudent = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameters 
+    var sCourses = parsedQs.courses;
+    var sEmail = parsedQs.email;
+    var sId = parsedQs.id;
+    var sName = parsedQs.name;
+    var docID;
+
+    if (sId.length !== 9) {
+        throw new functions.https.HttpsError("invalid-argument", "Student IDs must be 9 numbers long.");
+    }
+
+    // Queries Cloud Firestore for requested student
+    db.collection("students").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let studentExists = false;
+            if (querySnapshot.size === 1) {
+                studentExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return studentExists;
+        })
+        .then(studentExists => {
+            if (studentExists === true) {
+                updateStudent();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Updates an existing student
+    function updateStudent() {
+        db.collection("students").doc(docID).set({
+            courses: sCourses,
+            email: sEmail,
+            id: sId,
+            name: sName
+        })
+            .then(() => {
+                console.log("Student updated with DOCUMENT ID: ", docID);
+                return;
+            })
+            .catch(error => {
+                console.error("Error updating student: ", error);
+            });
+    }
+
+    return;
+});
+
+
+/////// DELETE REQUEST FUNCTIONS ///////
+
+
+exports.removeStudent = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameter
+    var sId = parsedQs.id;
+    var docID;
+
+    if (sId.length !== 9) {
+        throw new functions.https.HttpsError("invalid-argument", "Student IDs must be 9 numbers long.");
+    }
+
+    // Queries Cloud Firestore for requested student
+    db.collection("students").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let studentExists = false;
+            if (querySnapshot.size === 1) {
+                studentExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return studentExists;
+        })
+        .then(studentExists => {
+            if (studentExists === true) {
+                removeStudent();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Updates an existing student
+    function removeStudent() {
+        db.collection("students").doc(docID).delete()
+            .then(() => {
+                console.log("Student removed");
+                return;
+            })
+            .catch(error => {
+                console.error("Error removing student: ", error);
+            });
+    }
+    return;
+})
+
 
 // TESTING:
 // firebase serve --only functions
