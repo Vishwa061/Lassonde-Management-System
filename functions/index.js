@@ -775,7 +775,7 @@ exports.updateCourse = functions.https.onRequest((request, response) => {
     var docID;
 
     // Queries Cloud Firestore for requested course
-    db.collection("courses").where("id", "==", sId).get()
+    db.collection("courses").where("CAT", "==", sCAT).get()
         .then(querySnapshot => {
             let courseExists = false;
             if (querySnapshot.size === 1) {
@@ -835,7 +835,7 @@ exports.updateExam = functions.https.onRequest((request, response) => {
     var docID;
 
     // Queries Cloud Firestore for requested exam
-    db.collection("exams").where("id", "==", sId).get()
+    db.collection("exams").where("CAT", "==", sCAT).get()
         .then(querySnapshot => {
             let examExists = false;
             if (querySnapshot.size === 1) {
@@ -937,6 +937,205 @@ exports.removeStudent = functions.https.onRequest((request, response) => {
     return;
 })
 
+exports.removeProfessor = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameter
+    var sId = parsedQs.id;
+    var docID;
+
+    // Queries Cloud Firestore for requested professor
+    db.collection("professors").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let professorExists = false;
+            if (querySnapshot.size === 1) {
+                professorExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return professorExists;
+        })
+        .then(professorExists => {
+            if (professorExists === true) {
+                removeProfessor();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Removes an existing professor
+    function removeProfessor() {
+        db.collection("professors").doc(docID).delete()
+            .then(() => {
+                console.log("Professor removed");
+                return;
+            })
+            .catch(error => {
+                console.error("Error removing professor: ", error);
+            });
+    }
+    return;
+})
+
+exports.removeStaff = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameter
+    var sId = parsedQs.id;
+    var docID;
+
+    // Queries Cloud Firestore for requested staff member
+    db.collection("staff").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let staffExists = false;
+            if (querySnapshot.size === 1) {
+                staffExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return staffExists;
+        })
+        .then(staffExists => {
+            if (staffExists === true) {
+                removeStaff();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Removes an existing staff member
+    function removeStaff() {
+        db.collection("staff").doc(docID).delete()
+            .then(() => {
+                console.log("Staff member removed");
+                return;
+            })
+            .catch(error => {
+                console.error("Error removing staff member: ", error);
+            });
+    }
+    return;
+})
+
+// Warning: Removing a course will also remove any existing exam associated
+exports.removeCourse = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameter
+    var sCAT = parsedQs.CAT;
+    var docID;
+
+    // Queries Cloud Firestore for requested course
+    db.collection("courses").where("CAT", "==", sCAT).get()
+        .then(querySnapshot => {
+            let courseExists = false;
+            if (querySnapshot.size === 1) {
+                courseExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return courseExists;
+        })
+        .then(courseExists => {
+            if (courseExists === true) {
+                removeCourse();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Removes an existing course
+    function removeCourse() {
+        db.collection("courses").doc(docID).delete()
+            .then(() => {
+                console.log("Course removed");
+                removeExam(docID);
+                return;
+            })
+            .catch(error => {
+                console.error("Error removing course: ", error);
+            });
+    }
+    return;
+})
+
+exports.removeExam = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameter
+    var sCAT = parsedQs.CAT;
+    var docID;
+
+    // Queries Cloud Firestore for requested exam
+    db.collection("exams").where("CAT", "==", sCAT).get()
+        .then(querySnapshot => {
+            let examExists = false;
+            if (querySnapshot.size === 1) {
+                examExists = true;
+                querySnapshot.forEach(doc => {
+                    docID = doc.id;
+                })
+            }
+            return examExists;
+        })
+        .then(examExists => {
+            if (examExists === true) {
+                removeExam(docID);
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+
+    return;
+})
+
+// Removes an existing exam
+function removeExam(docID) {
+    db.collection("exams").doc(docID).delete()
+        .then(() => {
+            console.log("Exam removed");
+            return;
+        })
+        .catch(error => {
+            console.error("Error removing exam: ", error);
+        });
+}
 
 // TESTING:
 // firebase serve --only functions
