@@ -155,6 +155,43 @@ exports.getCourses = functions.https.onRequest((request, response) => {
     return;
 });
 
+exports.getExams = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the query parameters 
+    var key = parsedQs.key;
+    var value = parsedQs.value;
+
+    // console.log(key);
+    // console.log(value);
+
+    // Checks if the parameters are valid
+    if (!(typeof key === "string") || key.length === 0) {
+        throw new functions.https.HttpsError("invalid-argument", "The function must be called with " +
+            "two arguments 'key' and 'value' which must both be Strings and non-empty.");
+    }
+
+    // Queries Cloud Firestore for requested exam(s)
+    var exams = [];
+    db.collection("exams").where(key, "==", value).get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                exams.push(doc.data());
+            })
+            console.log("Exams Found in Query: ", exams);
+            response.send(exams);
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    return;
+});
+
+
 exports.getAllStudents = functions.https.onRequest((request, response) => {
     var students = [];
     db.collection("students").get()
@@ -227,6 +264,24 @@ exports.getAllCourses = functions.https.onRequest((request, response) => {
     return;
 });
 
+exports.getAllExams = functions.https.onRequest((request, response) => {
+    var exams = [];
+    db.collection("exams").get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                exams.push(doc.data());
+            });
+            console.log("Exams Found in Database: ", exams);
+            response.send(exams);
+            return;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    return;
+});
+
 
 /////// POST REQUEST FUNCTIONS ///////
 
@@ -239,7 +294,7 @@ exports.addStudent = functions.https.onRequest((request, response) => {
     let parsedUrl = url.parse(request.url);
     let parsedQs = querystring.parse(parsedUrl.query);
 
-    // Extracts the query parameters 
+    // Extracts the parameters 
     var sCourses = parsedQs.courses;
     var sEmail = parsedQs.email;
     var sId = parsedQs.id;
@@ -286,6 +341,176 @@ exports.addStudent = functions.https.onRequest((request, response) => {
             })
             .catch(error => {
                 console.error("Error adding student: ", error);
+            });
+    }
+
+    return;
+});
+
+exports.addProfessor = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the parameters 
+    var sCourses = parsedQs.courses;
+    var sEmail = parsedQs.email;
+    var sId = parsedQs.id;
+    var sName = parsedQs.name;
+
+    // Queries Cloud Firestore for requested professor
+    db.collection("professors").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let professorExists = false;
+            if (querySnapshot.size === 1) {
+                professorExists = true;
+            }
+            return professorExists;
+        })
+        .then(professorExists => {
+            if (professorExists === false) {
+                addProfessor();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Adds a new professor
+    function addProfessor() {
+        db.collection("professors").add({
+            courses: sCourses,
+            email: sEmail,
+            id: sId,
+            name: sName
+        })
+            .then(docRef => {
+                console.log("Professor added with DOCUMENT ID: ", docRef.id);
+                return;
+            })
+            .catch(error => {
+                console.error("Error adding professor: ", error);
+            });
+    }
+
+    return;
+});
+
+exports.addStaff = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the parameters 
+    var sRole = parsedQs.role;
+    var sEmail = parsedQs.email;
+    var sId = parsedQs.id;
+    var sName = parsedQs.name;
+
+    // if (sId.length !== 7) {
+    //     throw new functions.https.HttpsError("invalid-argument", "Staff IDs must be 7 numbers long.");
+    // }
+
+    // Queries Cloud Firestore for requested professor
+    db.collection("staff").where("id", "==", sId).get()
+        .then(querySnapshot => {
+            let staffExists = false;
+            if (querySnapshot.size === 1) {
+                staffExists = true;
+            }
+            return staffExists;
+        })
+        .then(staffExists => {
+            if (staffExists === false) {
+                addStaff();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Adds a new staff member
+    function addStaff() {
+        db.collection("staff").add({
+            role: sRole,
+            email: sEmail,
+            id: sId,
+            name: sName
+        })
+            .then(docRef => {
+                console.log("Staff member added with DOCUMENT ID: ", docRef.id);
+                return;
+            })
+            .catch(error => {
+                console.error("Error adding staff member: ", error);
+            });
+    }
+
+    return;
+});
+
+exports.addCourse = functions.https.onRequest((request, response) => {
+    // Parses the request
+    let parsedUrl = url.parse(request.url);
+    let parsedQs = querystring.parse(parsedUrl.query);
+
+    // Extracts the parameters 
+    var sCAT = parsedQs.CAT;
+    var sName = parsedQs.name;
+    var sRoom = parsedQs.room;
+    var sSemseter = parsedQs.semseter;
+    var sSubject = parsedQs.subject;
+    var sYear = parsedQs.year;
+
+    // Queries Cloud Firestore for requested course
+    db.collection("courses").where("CAT", "==", sCAT).get()
+        .then(querySnapshot => {
+            let courseExists = false;
+            if (querySnapshot.size === 1) {
+                courseExists = true;
+            }
+            return courseExists;
+        })
+        .then(courseExists => {
+            if (courseExists === false) {
+                addCourse();
+                response.send(true);
+            }
+            else {
+                response.send(false);
+            }
+            return;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Adds a new course
+    function addCourse() {
+        db.collection("courses").add({
+            CAT: sCAT,
+            name: sName,
+            room: sRoom,
+            semseter: sSemseter,
+            subject: sSubject,
+            year: sYear
+        })
+            .then(docRef => {
+                console.log("Course added with DOCUMENT ID: ", docRef.id);
+                return;
+            })
+            .catch(error => {
+                console.error("Error adding course: ", error);
             });
     }
 
@@ -404,7 +629,7 @@ exports.removeStudent = functions.https.onRequest((request, response) => {
             console.error(error);
         });
 
-    // Updates an existing student
+    // Removes an existing student
     function removeStudent() {
         db.collection("students").doc(docID).delete()
             .then(() => {
