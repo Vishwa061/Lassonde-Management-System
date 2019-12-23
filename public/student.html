@@ -20,7 +20,7 @@
     <div id="options">
       <button class="optionButtons" onclick="addStudent()">Add Student</button>
       <br>
-      <button id="remButton" class="optionButtons" onclick="remButton()">Remove Student</button>
+      <button id="remButton" class="optionButtons" onclick="remStudent()">Remove Student</button>
       <div id="remSearch"  hidden="true">
         <p>
           Search by Name:
@@ -34,7 +34,7 @@
         </p>
       </div>
       <br>
-      <button id="updButton" class="optionButtons" onclick="updButton()">Update Student</button>
+      <button id="updButton" class="optionButtons" onclick="upStudent()">Update Student</button>
       <div id="updSearch"  hidden="true">
         <p>
           Search by Name:
@@ -48,52 +48,22 @@
         </p>
       </div>
       <br>
-      <button class="optionButtons" onclick="createTable()">Show all Students</button>
+      <button class="optionButtons" onclick="showAllStudentData()">Show all Students</button>
     </div>
-    <div id="searchOptions">
-      <p id="searchBy">Search by</p> <br> <br> <br>
+    <div class="searchOptions">
+      <p class="searchBy">Search by</p> <br> <br> <br>
       <select name="searchMethods" id="selectOption">
         <option value="Name">Name</option>
-        <option value="Student ID">Student ID</option>
+        <option value="ID">Student ID</option>
         <option value="Current Courses">Current Courses</option>
       </select>
       <input name="searchBar" type="search" id="mainSearchBar">
-      <button id="searchMethods" onclick="onSearch()">Search</button>
+      <button id="searchMethods" onclick="showSpecificStudentData()">Search</button>
     </div>
     <div id="test">
-      <!-- <table id="data">
-          <tr>
-            <th width="50%">Student Name</th>
-            <th width="35%">Student Number</th>
-            <th width="10%">Update Info</th>
-            <th width="5%"></th>
-          </tr>
-          <tr>
-            <td id="name1">John Doe</td>
-            <td id="si1">123456789</td>
-            <td>Update</td>
-            <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
-          </tr>
-          <tr>
-            <td id="name2">Dane Joe</td>
-            <td id="si2">234567890</td>
-            <td>Update</td>
-            <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
-          </tr>
-          <tr>
-            <td id="name3">Johnathan Doeson</td>
-            <td id="si3">345678901</td>
-            <td>Update</td>
-            <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
-          </tr>
-          <tr>
-            <td id="name4">Lorem Ipsum</td>
-            <td id="si4">456789012</td>
-            <td>Update</td>
-            <td><img src="delete.png" class=trash width="20px" height="20px"></img></td>
-          </tr>
-      </table> -->
+
     </div>
+
     <!-- The Modal -->
   <div id="myModal" class="modal">
     <!-- Modal content -->
@@ -114,10 +84,49 @@
         <input type="number" id="stunum" class="addstu">
       </p>
     </br>
-    <button id="addbut" onclick="addbutonclk()"> Add </button>
+    <button id="addbut" onclick="addNewStudentData()"> Add </button>
     </div>
 
   </div>
+
+    <div id="myModal2" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close2">&times;</span>
+        <p> Select Student to Remove.</p>
+        </br>
+        <p class="addstu">
+          &nbsp;
+          Student ID:
+          &nbsp;
+          &nbsp;
+          <input type="text" id="stuname2" class="addstu" >
+        </p>
+        </br>
+        <button class="updbut" onclick="removeStudentData()"> Remove </button>
+      </div>
+
+    </div>
+
+    <div id="myModal3" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+<!--        <span class="close2">&times;</span>-->
+        <span class="close3">&times;</span>
+        <div class="searchOptions">
+          <p class="searchBy">Update by</p> <br> <br> <br>
+          <select name="searchMethods" id="selectOption2">
+            <option value="Name">Name</option>
+            <option value="ID">Student ID</option>
+            <option value="Current Courses">Current Courses</option>
+          </select>
+          <input name="searchBar" type="search" id="mainSearchBar2">
+          <button class="updbut" onclick="updbutonclk()"> Update </button>
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 </body>
