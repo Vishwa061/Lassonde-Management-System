@@ -21,32 +21,8 @@
       <button class="optionButtons" onclick="addStudent()">Add Student</button>
       <br>
       <button id="remButton" class="optionButtons" onclick="remStudent()">Remove Student</button>
-      <div id="remSearch"  hidden="true">
-        <p>
-          Search by Name:
-          <input type="text">
-          <button type="search">Search</button>
-        </p>
-        <p>
-          Search by Student ID:
-          <input type="text">
-          <button type="search">Search</button>
-        </p>
-      </div>
-      <br>
-      <button id="updButton" class="optionButtons" onclick="upStudent()">Update Student</button>
-      <div id="updSearch"  hidden="true">
-        <p>
-          Search by Name:
-          <input type="text">
-          <button type="search">Search</button>
-        </p>
-        <p>
-          Search by Student ID:
-          <input type="text">
-          <button type="search">Search</button>
-        </p>
-      </div>
+      <!-- <br> -->
+      <!-- <button id="updButton" class="optionButtons" onclick="upStudent()">Update Student</button> -->
       <br>
       <button class="optionButtons" onclick="showAllStudentData()">Show all Students</button>
     </div>
@@ -104,26 +80,6 @@
         </p>
         </br>
         <button class="updbut" onclick="removeStudentData()"> Remove </button>
-      </div>
-
-    </div>
-
-    <div id="myModal3" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-<!--        <span class="close2">&times;</span>-->
-        <span class="close3">&times;</span>
-        <div class="searchOptions">
-          <p class="searchBy">Update by</p> <br> <br> <br>
-          <select name="searchMethods" id="selectOption2">
-            <option value="Name">Name</option>
-            <option value="ID">Student ID</option>
-            <option value="Current Courses">Current Courses</option>
-          </select>
-          <input name="searchBar" type="search" id="mainSearchBar2">
-          <button class="updbut" onclick="updbutonclk()"> Update </button>
-        </div>
-
       </div>
 
     </div>
