@@ -98,7 +98,8 @@ html, body {
   float: left;
   max-height: 70%;
   overflow-y: scroll;
-
+  max-width: 80%;
+  overflow-x: scroll;
 }
 table {
   text-align: center

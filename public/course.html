@@ -8,42 +8,42 @@
   <title> Lassonde Management - Courses</title>
 </head>
 <body>
-  <div id="container">
-    <div id="topBar">
-      <a href="home.html" id="header"> Lassonde </a>
-      <a href ="student.html" class="topButton">Students</a>
-      <a href ="professor.html" class="topButton">Professors</a>
-      <a href ="course.html" class="topButton">Courses</a>
-      <a href ="staff.html" class="topButton">Staff</a>
-      <a href ="exams.html" class="topButton">Exams</a>
-    </div>
-    <div id="options">
-      <button class="optionButtons" onclick="addStudent()">Add Course</button>
-      <br>
-      <button id="remButton" class="optionButtons" onclick="remStudent()">Remove Course</button>
-      <br>
-      <button class="optionButtons" onclick="showAllCourseData()">Show all Courses</button>
-    </div>
-    <div class="searchOptions">
-      <p class="searchBy">Search by</p> <br> <br> <br>
-      <select name="searchMethods" id="selectOption">
-        <option value="Name">Name</option>
-        <option value="CAT">CAT</option>
-      </select>
-      <input name="searchBar" type="search" id="mainSearchBar">
-      <button id="searchMethods" onclick="showSpecificCourseData()">Search</button>
-    </div>
-    <div id="test">
+<div id="container">
+  <div id="topBar">
+    <a href="home.html" id="header"> Lassonde </a>
+    <a href ="student.html" class="topButton">Students</a>
+    <a href ="professor.html" class="topButton">Professors</a>
+    <a href ="course.html" class="topButton">Courses</a>
+    <a href ="staff.html" class="topButton">Staff</a>
+    <a href ="exams.html" class="topButton">Exams</a>
+  </div>
+  <div id="options">
+    <button class="optionButtons" onclick="addStudent()">Add Course</button>
+    <br>
+    <button id="remButton" class="optionButtons" onclick="remStudent()">Remove Course</button>
+    <br>
+    <button class="optionButtons" onclick="showAllCourseData()">Show all Courses</button>
+  </div>
+  <div class="searchOptions">
+    <p class="searchBy">Search by</p> <br> <br> <br>
+    <select name="searchMethods" id="selectOption">
+      <option value="Name">Name</option>
+      <option value="CAT">CAT</option>
+    </select>
+    <input name="searchBar" type="search" id="mainSearchBar">
+    <button id="searchMethods" onclick="showSpecificCourseData()">Search</button>
+  </div>
+  <div id="test">
 
-    </div>
+  </div>
 
-    <!-- The Modal -->
+  <!-- The Modal -->
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
       <p> Add Information to add course.</p>
-    </br>
+      </br>
       <p class="addcourse">
         &nbsp;
         Name:
@@ -60,31 +60,31 @@
         &nbsp;
         <input type="text" id="coursesubject" class="addcourse">
       </p>
-    </br>
-    <button id="addbut" onclick="addNewCourseData()"> Add </button>
+      </br>
+      <button id="addbut" onclick="addNewCourseData()"> Add </button>
     </div>
 
   </div>
 
-    <div id="myModal2" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close2">&times;</span>
-        <p> Select Course to Remove.</p>
-        </br>
-        <p class="removecourse">
-          &nbsp;
-          Course CAT#:
-          &nbsp;
-          &nbsp;
-          <input type="text" id="courseCATremoved" class="removecourse" >
-        </p>
-        </br>
-        <button class="updbut" onclick="removeCourseData()"> Remove </button>
-      </div>
-
+  <div id="myModal2" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close2">&times;</span>
+      <p> Select Course to Remove.</p>
+      </br>
+      <p class="removecourse">
+        &nbsp;
+        Course CAT#:
+        &nbsp;
+        &nbsp;
+        <input type="text" id="courseCATremoved" class="removecourse" >
+      </p>
+      </br>
+      <button class="updbut" onclick="removeCourseData()"> Remove </button>
     </div>
 
   </div>
+
+</div>
 </body>
 </html>
