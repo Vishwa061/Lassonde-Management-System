@@ -468,7 +468,7 @@ exports.addCourse = functions.https.onRequest((request, response) => {
     var sCAT = parsedQs.CAT;
     var sName = parsedQs.name;
     var sRoom = parsedQs.room;
-    var sSemseter = parsedQs.semseter;
+    var sSemester = parsedQs.semester;
     var sSubject = parsedQs.subject;
     var sYear = parsedQs.year;
 
@@ -501,7 +501,7 @@ exports.addCourse = functions.https.onRequest((request, response) => {
             CAT: sCAT,
             name: sName,
             room: sRoom,
-            semseter: sSemseter,
+            semester: sSemester,
             subject: sSubject,
             year: sYear
         })

@@ -74,7 +74,7 @@ function generateCourseTable(data) {
         var cell3 = document.createElement("TD");
         cell1.innerHTML = data[i].name;
         cell2.innerHTML = data[i].CAT;
-        cell3.innerHTML = "update";
+        cell3.innerHTML = data[i].subject;
         rows.appendChild(cell1);
         rows.appendChild(cell2);
         rows.appendChild(cell3);
@@ -319,7 +319,7 @@ function showSpecificCourseData() {
     createTable("Course Name", "Course CAT", "Subject");
     var selectOpt = document.getElementById("selectOption").value;
     var searchInput = document.getElementById("mainSearchBar").value;
-    var params = "?key=" + selectOpt.toLowerCase() + "&value=" + searchInput;
+    var params = "?key=" + selectOpt + "&value=" + searchInput;
     console.log(searchInput, selectOpt);
     var request = new XMLHttpRequest();
     request.open('GET', 'https://us-central1-management-system-be9f9.cloudfunctions.net/getCourses' + params, true)
@@ -332,6 +332,7 @@ function showSpecificCourseData() {
 
     request.send();
 }
+
 function addNewCourseData() {
     var coursename = document.getElementById("coursename").value;
     var courseCAT = document.getElementById("courseCAT").value;
@@ -359,6 +360,7 @@ function removeCourseData() {
 
     request.send()
 }
+
 function showAllCourseData() {
     createTable("Course Name", "Course CAT", "Subject");
     var request = new XMLHttpRequest()
