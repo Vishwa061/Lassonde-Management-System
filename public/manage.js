@@ -1,6 +1,34 @@
 var create = true;
 var star = [];
 
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+
+    if(h == 0){
+        h = 12;
+    }
+
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+
+    setTimeout(showTime, 1000);
+
+}
+
 // Creates the top row of table "Student Name" "Student Number" etc
 function createTable(name,id,info) {
 
@@ -110,7 +138,7 @@ function generateExamTable(data) {
         var cell3 = document.createElement("TD");
         cell1.innerHTML = data[i].CAT;
         cell2.innerHTML = data[i].date;
-        cell3.innerHTML = data[i].location;
+        cell3.innerHTML = data[i].room;
         rows.appendChild(cell1);
         rows.appendChild(cell2);
         rows.appendChild(cell3);
@@ -145,7 +173,8 @@ function addNewExamData() {
     var stuname = document.getElementById("stuname").value;
     var stunum = document.getElementById("stunum").value;
     var studate = document.getElementById("studate").value;
-    var params = "?date=" + studate + "&CAT=" + stuname + "&duration" + "&room=" + stunum;
+    var params = "?CAT=" + stuname + "&date=" + studate + "&duration" + "&room=" + stunum;
+    console.log(stunum,stuname,studate);
     var request = new XMLHttpRequest();
     request.open('POST', 'https://us-central1-management-system-be9f9.cloudfunctions.net/addExam'+params, true)
     request.onload = function() {
@@ -332,7 +361,6 @@ function showSpecificCourseData() {
 
     request.send();
 }
-
 function addNewCourseData() {
     var coursename = document.getElementById("coursename").value;
     var courseCAT = document.getElementById("courseCAT").value;
@@ -360,7 +388,6 @@ function removeCourseData() {
 
     request.send()
 }
-
 function showAllCourseData() {
     createTable("Course Name", "Course CAT", "Subject");
     var request = new XMLHttpRequest()
