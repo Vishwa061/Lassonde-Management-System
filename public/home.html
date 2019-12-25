@@ -20,27 +20,22 @@
   <script defer src="manage.js"></script>
 </head>
 
-<body>
+<body onload="showTime()">
   <div id="container">
     <div id="topBar">
       <a href="home.html" id="header"> Lassonde </a>
-      <a href="student.html" class="topButton">Students</a>
-      <a href="professor.html" class="topButton">Professors</a>
-      <a href="course.html" class="topButton">Courses</a>
-      <a href="" class="topButton">Staff</a>
-      <a href="" class="topButton">Exams</a>
+      <a href ="student.html" class="topButton">Students</a>
+      <a href ="professor.html" class="topButton">Professors</a>
+      <a href ="course.html" class="topButton">Courses</a>
+      <a href ="staff.html" class="topButton">Staff</a>
+      <a href ="exam.html" class="topButton">Exams</a>
     </div>
-    <div id="summary">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices vel sapien a ultrices. Praesent eget nunc
-        odio. Duis non libero porta, lobortis enim sit amet, elementum nisl. Curabitur luctus, nibh vel rutrum
-        hendrerit, eros ante tincidunt leo, vitae maximus nibh ligula nec lacus. Donec ut ipsum neque. Morbi euismod
-        molestie erat. Morbi molestie volutpat ligula sit amet dictum. Etiam dictum tempor eros, id sagittis nisi
-        sodales a. Aliquam erat volutpat. Morbi tempor vitae mauris eu venenatis. Pellentesque at nunc et dui aliquet
-        pretium ac vel diam. Nunc eu efficitur mi. Curabitur sit amet aliquet arcu, sit amet eleifend erat. Interdum et
-        malesuada fames ac ante ipsum primis in faucibus.
-      </p>
-    </div>
+    <p id="p"> Welcome to Lassonde Managment System</p>
+    </br>
+    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+
+  </div>
 </body>
+
 
 </html>
